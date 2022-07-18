@@ -1,0 +1,1 @@
+# nginx-oidc-ping-v2
