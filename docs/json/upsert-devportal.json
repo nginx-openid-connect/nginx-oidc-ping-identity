@@ -1,0 +1,322 @@
+{
+  "name": "env-sports",
+  "type": "NON-PROD",
+  "metadata": {
+    "kind": "environment",
+    "link": {
+      "rel": "/api/acm/v1/services/workspaces/acm-infra/environments/env-sports"
+    },
+    "ref": "/api/acm/v1/services/workspaces/acm-infra",
+    "tags": []
+  },
+  "functions": [
+    "DEVPORTAL"
+  ],
+  "templates": {
+    "gateway": {
+      "apiProxy": {
+        "basePathLocation": "0bdccdf5-2a5f-4a16-8433-7c0dddc67d7a",
+        "pathLocation": "0bdccdf5-2a5f-4a16-8433-7c0dddc67d7a",
+        "upstream": "810527d9-d94d-4938-995a-41e3519cfe85"
+      },
+      "main": "ec751c14-1f0a-4e3e-8d2a-086633699d5a",
+      "server": "bf915ad6-2651-4777-9697-7ec03aa4fdcb"
+    },
+    "portal": {
+      "main": "ec751c14-1f0a-4e3e-8d2a-086633699d5a",
+      "server": "bf915ad6-2651-4777-9697-7ec03aa4fdcb"
+    }
+  },
+  "systemProperties": {
+    "acmHostName": "10.146.183.184"
+  },
+  "proxies": [
+    {
+      "configs": [
+        {
+          "proxyConfig": {
+            "hostname": "nginx.devportal.onelogin.test",
+            "backends": [
+              {
+                "enableSRVRecordLookUp": false,
+                "serviceContextRoot": "/",
+                "serviceName": "portalapi-svc",
+                "serviceTargets": [
+                  {
+                    "hostname": "127.0.0.1",
+                    "listener": {
+                      "enableTLS": false,
+                      "port": 8080,
+                      "transportProtocol": "HTTP"
+                    },
+                    "maxConnections": 0,
+                    "maxFails": 0
+                  }
+                ],
+                "label": {},
+                "isSRVRecordLookUpEnabled": false,
+                "isResolverEnabled": false
+              }
+            ]
+          }
+        }
+      ],
+      "hostnames": [
+        "nginx.devportal.onelogin.test"
+      ],
+      "instances": [
+        {
+          "agent": {
+            "accessibleDirs": "/etc/nginx:/usr/local/etc/nginx:/usr/share/nginx/modules:/etc/nms",
+            "version": "v2.16.20-SNAPSHOT"
+          },
+          "configPath": "/etc/nginx/nginx.conf",
+          "displayName": "testenv-fcacfb2c-host-1",
+          "registrationTime": "2022-10-06T14:58:39.000Z",
+          "startTime": "2022-10-06T20:42:03Z",
+          "status": {
+            "lastStatusReport": "2022-10-06T17:25:31.235465288-06:00",
+            "state": "online"
+          },
+          "systemUid": "c5805ce7-6674-3d49-bb4f-f8849239dac6",
+          "uid": "0bf7673e-6546-5da3-9b15-1947a05b5796",
+          "version": "1.21.6"
+        }
+      ],
+      "listeners": [
+        {
+          "ipv6": false,
+          "tlsEnabled": true,
+          "transportProtocol": "HTTP",
+          "port": 443
+        }
+      ],
+      "onboardingCommands": [
+        "curl -k https://<CTRL-FQDN>/install/nginx-agent > install.sh && sudo sh install.sh -g devp-group && sudo systemctl start nginx-agent",
+        "wget https://<CTRL-FQDN>/install/nginx-agent --no-check-certificate -O install.sh && sudo sh install.sh -g devp-group && sudo systemctl start nginx-agent"
+      ],
+      "policies": {
+        "oidc-authz": [
+          {
+            "metadata": {},
+            "systemMetadata": {
+              "appliedOn": "inbound",
+              "context": "global"
+            },
+            "action": {
+              "authFlowType": "PKCE",
+              "authorizationEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/auth",
+              "errorReturnConditions": {
+                "noMatch": {
+                  "returnCode": 403
+                },
+                "notSupplied": {
+                  "returnCode": 401
+                }
+              },
+              "jwksURI": "https://nginx-plus-oidc.onelogin.com/oidc/certs",
+              "logOffEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/logout",
+              "logOutParams": [],
+              "tokenEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/token",
+              "tokenParams": [
+                {
+                  "key": "Accept-Encoding",
+                  "paramType": "HEADER",
+                  "value": "gzip"
+                }
+              ],
+              "uris": {
+                "loginURI": "/login",
+                "logoutURI": "/logout",
+                "redirectURI": "/_codexch",
+                "userInfoURI": "/userinfo"
+              },
+              "userInfoEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/me"
+            },
+            "data": [
+              {
+                "clientID": "2a8ae2c0-27ed-013b-6e34-0ad7b610bf45216865",
+                "scopes": "openid+profile+email",
+                "source": "ACM"
+              }
+            ]
+          }
+        ],
+        "proxy-response-headers": [
+          {
+            "metadata": {
+              "labels": []
+            },
+            "systemMetadata": {
+              "appliedOn": "inbound",
+              "context": "global"
+            },
+            "action": {
+              "config": [
+                {
+                  "name": "hide-nginx-headers",
+                  "enabled": true,
+                  "always": false
+                }
+              ],
+              "customResponseHeaders": [
+                {
+                  "always": false,
+                  "key": "Cache-Control",
+                  "value": "max-age=1d, must-revalidate"
+                }
+              ]
+            }
+          }
+        ],
+        "rate-limit": [
+          {
+            "metadata": {},
+            "systemMetadata": {
+              "appliedOn": "inbound",
+              "context": "global"
+            },
+            "action": {
+              "returnCode": 429,
+              "limits": [
+                {
+                  "rate": "50r/s",
+                  "rateLimitBy": "client.ip",
+                  "throttle": {
+                    "burst": 20,
+                    "noDelay": true
+                  },
+                  "zoneSize": "10M"
+                }
+              ]
+            }
+          }
+        ],
+        "tls-inbound": [
+          {
+            "metadata": {
+              "labels": []
+            },
+            "systemMetadata": {
+              "appliedOn": "inbound",
+              "context": "global"
+            },
+            "action": {
+              "cipher": "ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5",
+              "errorReturnConditions": {
+                "noMatch": {
+                  "returnCode": 403
+                },
+                "notSupplied": {
+                  "returnCode": 401
+                }
+              },
+              "protocols": [
+                "TLSv1.2"
+              ],
+              "sessionCache": {
+                "enable": "on",
+                "size": "10M",
+                "type": "shared"
+              },
+              "sessionTimeout": "5m"
+            },
+            "data": {
+              "serverCerts": [
+                {
+                  "cert": "-----BEGIN CERTIFICATE-----\nMIID6zCCAtOgAwIBAgIUVnQUhqa2SzdxGyZ4tSDGlQGIrM0wDQYJKoZIhvcNAQEL\nBQAwgYQxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJXQTEQMA4GA1UEBwwHU2VhdHRs\nZTELMAkGA1UECgwCRjUxDjAMBgNVBAsMBU5HSU5YMRgwFgYDVQQDDA9OR0lOWCBQ\nbHVzIE9JREMxHzAdBgkqhkiG9w0BCQEWEHNhbXBsZUBuZ2lueC5jb20wHhcNMjIw\nOTI5MjA0MjUwWhcNMjcwOTI4MjA0MjUwWjCBhDELMAkGA1UEBhMCVVMxCzAJBgNV\nBAgMAldBMRAwDgYDVQQHDAdTZWF0dGxlMQswCQYDVQQKDAJGNTEOMAwGA1UECwwF\nTkdJTlgxGDAWBgNVBAMMD05HSU5YIFBsdXMgT0lEQzEfMB0GCSqGSIb3DQEJARYQ\nc2FtcGxlQG5naW54LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB\nALeXigN7MdvoYwLr5UsBHG5pCMMWellN6sp7JRH1kwpYoD5iARWgKVlaNIixmQpS\njT+jB9h3V23/svUEGcsBz/9O9npZBNSnVnqZD4o6qSnMu3lPxpsburYPmXICTmtx\n6SRrOXmRChxsovNXjzN+9d/kRvlAYvfjsD93Esl4pMIjyHrMlWZ9dzHT1Ti2cwRL\n1Q1TvL0qTNy++EmPpkFiSxI5O9QI8p8QfLWOQiEL2askxENXaQQSS4RJ5Y4PEq8a\nUIAuDB234wRXxwcNomiAbTSBr1JVYR+qxPT/MfWjN6fBEXkOqr2M/GxzZ9ygqHNR\nAPZCsTnkUQh8kQEMK5JpFXMCAwEAAaNTMFEwHQYDVR0OBBYEFANrWikP5+jkkXD7\n7iSjAXFxgRGoMB8GA1UdIwQYMBaAFANrWikP5+jkkXD77iSjAXFxgRGoMA8GA1Ud\nEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAC9DWkOfZ3/o/F2eJYJq6bGe\n8B4NRi0j1Qw9YFDD6D3ZmVx6sFrCXUpTMYLEBKTC7vGsKlEbl3Dni+Zjcf8b0WoE\nrdWRaRgaDIehOBcNobWVvf56EPploougVIGpqIbjSt2P+XNZFvHepd0DgMMRZTXW\nwQBQUfIlAqsktrrBDYhEvg/XaNDURqDKDeu7yDCd6WUevgzPOr3t4k0njcV2Jev1\n8bdK1lBDq3rWZOYqhwOmmaJCIgUCDyliikcmwBZibx645LVk8Wfn5zKtsZn4CPar\n5CMOokfdZa3yy+PnyFocf+rhLSXd9Bb7Tj/dtBoTO4/J63ulLcrzOtfVRpDYj64=\n-----END CERTIFICATE-----\n"
+                }
+              ],
+              "clientCerts": []
+            }
+          }
+        ]
+      },
+      "proxyClusterName": "devp-group",
+      "runtime": "PORTAL-PROXY"
+    },
+    {
+      "hostnames": [
+        "acm.nginx.devportal.onelogin.test"
+      ],
+      "instances": [
+        {
+          "agent": {
+            "accessibleDirs": "/etc/nginx:/usr/local/etc/nginx:/usr/share/nginx/modules:/etc/nms",
+            "version": "v2.16.20-SNAPSHOT"
+          },
+          "configPath": "/etc/nginx/nginx.conf",
+          "displayName": "testenv-fcacfb2c-host-1",
+          "registrationTime": "2022-10-06T14:58:39.000Z",
+          "startTime": "2022-10-06T20:42:03Z",
+          "status": {
+            "lastStatusReport": "2022-10-06T17:25:31.235465288-06:00",
+            "state": "online"
+          },
+          "systemUid": "c5805ce7-6674-3d49-bb4f-f8849239dac6",
+          "uid": "0bf7673e-6546-5da3-9b15-1947a05b5796",
+          "version": "1.21.6"
+        }
+      ],
+      "listeners": [
+        {
+          "ipv6": false,
+          "port": 81,
+          "tlsEnabled": false,
+          "transportProtocol": "HTTP"
+        }
+      ],
+      "onboardingCommands": [
+        "curl -k https://<CTRL-FQDN>/install/nginx-agent > install.sh && sudo sh install.sh -g devp-group && sudo systemctl start nginx-agent",
+        "wget https://<CTRL-FQDN>/install/nginx-agent --no-check-certificate -O install.sh && sudo sh install.sh -g devp-group && sudo systemctl start nginx-agent"
+      ],
+      "policies": {
+        "proxy-response-headers": [
+          {
+            "metadata": {
+              "labels": []
+            },
+            "systemMetadata": {
+              "appliedOn": "inbound",
+              "context": "global"
+            },
+            "action": {
+              "config": [
+                {
+                  "name": "hide-nginx-headers",
+                  "enabled": true,
+                  "always": false
+                }
+              ]
+            }
+          }
+        ],
+        "rate-limit": [
+          {
+            "metadata": {},
+            "systemMetadata": {
+              "appliedOn": "inbound",
+              "context": "global"
+            },
+            "action": {
+              "returnCode": 429,
+              "limits": [
+                {
+                  "rate": "100r/s",
+                  "rateLimitBy": "client.ip",
+                  "throttle": {
+                    "burst": 20,
+                    "noDelay": true
+                  },
+                  "zoneSize": "10M"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "proxyClusterName": "devp-group",
+      "runtime": "INT-PORTAL-ACM-PROXY"
+    }
+  ]
+}
