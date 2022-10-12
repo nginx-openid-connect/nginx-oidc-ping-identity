@@ -28,14 +28,14 @@
     }
   },
   "systemProperties": {
-    "acmHostName": "10.146.183.184"
+    "acmHostName": "10.146.184.8"
   },
   "proxies": [
     {
       "configs": [
         {
           "proxyConfig": {
-            "hostname": "nginx.devportal.onelogin.test",
+            "hostname": "nginx.devportal.pingidentity.test",
             "backends": [
               {
                 "enableSRVRecordLookUp": false,
@@ -62,7 +62,7 @@
         }
       ],
       "hostnames": [
-        "nginx.devportal.onelogin.test"
+        "nginx.devportal.pingidentity.test"
       ],
       "instances": [
         {
@@ -71,15 +71,15 @@
             "version": "v2.16.20-SNAPSHOT"
           },
           "configPath": "/etc/nginx/nginx.conf",
-          "displayName": "testenv-fcacfb2c-host-1",
-          "registrationTime": "2022-10-06T14:58:39.000Z",
-          "startTime": "2022-10-06T20:42:03Z",
+          "displayName": "testenv-06999dc3-host-1",
+          "registrationTime": "2022-10-12T14:41:14.000Z",
+          "startTime": "2022-10-12T20:23:32Z",
           "status": {
-            "lastStatusReport": "2022-10-06T17:25:31.235465288-06:00",
+            "lastStatusReport": "2022-10-12T16:37:14.491200608-06:00",
             "state": "online"
           },
-          "systemUid": "c5805ce7-6674-3d49-bb4f-f8849239dac6",
-          "uid": "0bf7673e-6546-5da3-9b15-1947a05b5796",
+          "systemUid": "a5c4956d-92e8-3f91-a9eb-fe24f4c91854",
+          "uid": "f59a27a4-7af5-5eb3-b00a-6465af260265",
           "version": "1.21.6"
         }
       ],
@@ -104,8 +104,8 @@
               "context": "global"
             },
             "action": {
-              "authFlowType": "PKCE",
-              "authorizationEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/auth",
+              "authFlowType": "AUTHCODE",
+              "authorizationEndpoint": "https://auth.pingone.ca/de35baa5-1ca0-4f66-bb18-3714cd06e5c7/as/authorize",
               "errorReturnConditions": {
                 "noMatch": {
                   "returnCode": 403
@@ -114,10 +114,10 @@
                   "returnCode": 401
                 }
               },
-              "jwksURI": "https://nginx-plus-oidc.onelogin.com/oidc/certs",
-              "logOffEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/logout",
+              "jwksURI": "https://auth.pingone.ca/de35baa5-1ca0-4f66-bb18-3714cd06e5c7/as/jwks",
+              "logOffEndpoint": "https://auth.pingone.ca/de35baa5-1ca0-4f66-bb18-3714cd06e5c7/as/signoff",
               "logOutParams": [],
-              "tokenEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/token",
+              "tokenEndpoint": "https://auth.pingone.ca/de35baa5-1ca0-4f66-bb18-3714cd06e5c7/as/token",
               "tokenParams": [
                 {
                   "key": "Accept-Encoding",
@@ -131,11 +131,11 @@
                 "redirectURI": "/_codexch",
                 "userInfoURI": "/userinfo"
               },
-              "userInfoEndpoint": "https://nginx-plus-oidc.onelogin.com/oidc/2/me"
+              "userInfoEndpoint": "https://auth.pingone.ca/de35baa5-1ca0-4f66-bb18-3714cd06e5c7/as/userinfo"
             },
             "data": [
               {
-                "clientID": "2a8ae2c0-27ed-013b-6e34-0ad7b610bf45216865",
+                "clientID": "eee9aa01-7c94-4312-a106-f079a02ee88a",
                 "scopes": "openid+profile+email",
                 "source": "ACM"
               }
@@ -237,7 +237,7 @@
     },
     {
       "hostnames": [
-        "acm.nginx.devportal.onelogin.test"
+        "acm.nginx.devportal.pingidentity.test"
       ],
       "instances": [
         {
@@ -246,15 +246,15 @@
             "version": "v2.16.20-SNAPSHOT"
           },
           "configPath": "/etc/nginx/nginx.conf",
-          "displayName": "testenv-fcacfb2c-host-1",
-          "registrationTime": "2022-10-06T14:58:39.000Z",
-          "startTime": "2022-10-06T20:42:03Z",
+          "displayName": "testenv-06999dc3-host-1",
+          "registrationTime": "2022-10-12T14:41:14.000Z",
+          "startTime": "2022-10-12T20:23:32Z",
           "status": {
-            "lastStatusReport": "2022-10-06T17:25:31.235465288-06:00",
+            "lastStatusReport": "2022-10-12T16:37:14.491200608-06:00",
             "state": "online"
           },
-          "systemUid": "c5805ce7-6674-3d49-bb4f-f8849239dac6",
-          "uid": "0bf7673e-6546-5da3-9b15-1947a05b5796",
+          "systemUid": "a5c4956d-92e8-3f91-a9eb-fe24f4c91854",
+          "uid": "f59a27a4-7af5-5eb3-b00a-6465af260265",
           "version": "1.21.6"
         }
       ],
