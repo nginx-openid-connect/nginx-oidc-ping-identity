@@ -1,6 +1,6 @@
-# How To Locally Test Containerized NGINX Plus OIDC for OneLogin Integration
+# How To Locally Test Containerized NGINX Plus OIDC for Ping Identity Integration
 
-Take the following steps to run NGINX Plus in a Docker container and test OIDC for OneLogin integration.
+Take the following steps to run NGINX Plus in a Docker container and test OIDC for Ping Identity integration.
 
 > Note: You could remotely test in your remote machine if you copy entire files there.
 
@@ -11,7 +11,7 @@ Take the following steps to run NGINX Plus in a Docker container and test OIDC f
 
   ```bash
   $ sudo vi /etc/hosts
-  127.0.0.1 nginx.onelogin.test
+  127.0.0.1 nginx.pingidentity.test
   ```
 
 - [Download NGINX Plus license files](https://www.nginx.com/free-trial-request/), and copy them to `./docker/build-context/ssl/`
@@ -39,7 +39,7 @@ Take the following steps to run NGINX Plus in a Docker container and test OIDC f
 
 ## 3. Run a Browser and Test OIDC
 
-- **Run** a Web Browser with `https://nginx.onlogin.test:16000`, and enter an `IdP application`'s `client ID`:
+- **Run** a Web Browser with `https://nginx.pingidentity.test:17000`, and enter an `IdP application`'s `client ID`:
 
   ![](./img/run-browser.png)
 
@@ -47,7 +47,7 @@ Take the following steps to run NGINX Plus in a Docker container and test OIDC f
 
   Enter your name and password which are registered in OntLogin.
 
-  ![](./img/login-onelogin.png)
+  ![](./img/login-ping-one.png)
 
   You will see the following screen once you are successfully signed-in.
 
