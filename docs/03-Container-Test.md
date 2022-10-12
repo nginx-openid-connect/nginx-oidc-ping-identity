@@ -65,8 +65,8 @@ Take the following steps to run NGINX Plus in a Docker container and test OIDC f
 
   ```nginx
       location /v1/api/example {
-          auth_jwt "" token=$id_token;
-          auth_jwt_key_request /_jwks_uri;        # Enable when using URL
+          auth_jwt "" token=$access_token; # Use id_token if it isn't JWT.
+          auth_jwt_key_request /_jwks_uri; # Enable when using URL
 
           proxy_set_header Authorization "Bearer $access_token";
           proxy_pass http://my_backend_app;
