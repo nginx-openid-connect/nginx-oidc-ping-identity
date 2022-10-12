@@ -10,6 +10,13 @@ Take the following steps to create a new application of Ping Identity for integr
 - [Configure Auth Code or PKCE Flow](#configure-auth-code-or-pkce-flow)
   - [Option 1. Configure Auth Code Flow](#option-1-configure-auth-code-flow)
   - [Option 2. Configure PKCE Flow](#option-2-configure-pkce-flow)
+- [Configure Redirect URIs for Login and Logout](#configure-redirect-uris-for-login-and-logout)
+- [Configure Scopes](#configure-scopes)
+- [Enable Application](#enable-application)
+- [Make Note of Environment ID and Client ID](#make-note-of-environment-id-and-client-id)
+  - [Option 1. Auth Code Flow: Note Client Secret](#option-1-auth-code-flow-note-client-secret)
+  - [Option 2. PKCE Flow: Skip Client Secret](#option-2-pkce-flow-skip-client-secret)
+- [Add User](#add-user)
 
 ## Create a New Application
 
