@@ -1,24 +1,24 @@
-# How To Set Up NGINX ACM/DevPortal OIDC for OneLogin Integration
+# How To Set Up NGINX ACM/DevPortal OIDC for Ping Identity Integration
 
-Take the following steps to set up NGINX ACM/DevPortal OIDC and test it for OneLogin integration.
+Take the following steps to set up NGINX ACM/DevPortal OIDC and test it for Ping Identity integration.
 
 ## 1. Prerequisites
 
-- [**Set up OneLogin**](./01-IdP-Setup.md)
+- [**Set up Ping Identity**](./01-IdP-Setup.md)
 
   Ensure that you use **different application and callback/logout URLs** as the following example unlike that are already created to test your [containerized NGINX Plus](./02-NGINX-Plus-Setup.md).
 
-  | Category                  | Example                                          |
-  | ------------------------- | ------------------------------------------------ |
-  | Application Name          | `nginx-devportal-app`                            |
-  | Redirect URI's            | `https://nginx.devportal.onelogin.test/_codexch` |
-  | Post Logout Redirect URIs | `https://nginx.devportal.onelogin.test/_logout`  |
+  | Category         | Example                                              |
+  | ---------------- | ---------------------------------------------------- |
+  | Application Name | `nginx-devportal-app`                                |
+  | Redirect URIs    | `https://nginx.devportal.pingidentity.test/_codexch` |
+  | Signoff URLs     | `https://nginx.devportal.pingidentity.test/_logout`  |
 
 - Edit `hosts` file in your laptop via if you want to locally test your app:
 
   ```bash
   $ sudo vi /etc/hosts
-  127.0.0.1 nginx.devportal.onelogin.test
+  127.0.0.1 nginx.devportal.pingidentity.test
   ```
 
 ## 2. Install NGINX API Connectivity Manager
@@ -69,25 +69,29 @@ Configure a Dev Portal by either referencing **NGINX Management Suite Docs** of 
 
   **Option 1. Request Body for None PKCE**:
 
-  ```json
+  ````json
   {
     "name": "{{environmentname}}",
-    "functions": ["DEVPORTAL"],
+    "functions": [
+      "DEVPORTAL"
+    ],
     "proxies": [
       {
         "proxyClusterName": "{{devPinstanceGroupName}}",
-        "hostnames": ["{{devPenvironmentHostname}}"],
+        "hostnames": [
+          "{{devPenvironmentHostname}}"
+        ],
         "runtime": "PORTAL-PROXY",
         "policies": {
           "oidc-authz": [
             {
               "action": {
                 "authFlowType": "AUTHCODE",
-                "jwksURI": "https://{{idpDomain}}/oidc/certs",
-                "tokenEndpoint": "https://{{idpDomain}}/oidc/2/token",
-                "userInfoEndpoint": "https://{{idpDomain}}/oidc/2/me",
-                "authorizationEndpoint": "https://{{idpDomain}}/oidc/2/auth",
-                "logOffEndpoint": "https://{{idpDomain}}/oidc/2/logout",
+                "jwksURI": "https://{{idpDomain}}/{{idpEnvironmentId}}/as/jwks",
+                "tokenEndpoint": "https://{{idpDomain}}/{{idpEnvironmentId}}/as/token",
+                "userInfoEndpoint": "https://{{idpDomain}}/{{idpEnvironmentId}}/as/userinfo",
+                "authorizationEndpoint": "https://{{idpDomain}}/{{idpEnvironmentId}}/as/authorize",
+                "logOffEndpoint": "https://{{idpDomain}}/{{idpEnvironmentId}}/as/signoff",
                 "logOutParams": [],
                 "TokenParams": [
                   {
@@ -141,6 +145,7 @@ Configure a Dev Portal by either referencing **NGINX Management Suite Docs** of 
   >        :
   > }
   > ```
+  ````
 
 - Get an environment of `Dev Portal`:
 
@@ -166,14 +171,16 @@ Configure a Dev Portal by either referencing **NGINX Management Suite Docs** of 
 
   > `DELETE https://{{ctrl_ip}}/api/acm/v1/infrastructure/workspaces/{{infraworkspacename}}/environments/{{environmentname}}`
 
-## 3. Test Dev Portal OIDC with OneLogin
+## 3. Test Dev Portal OIDC with Ping Identity
 
-- Open a web browser and access the Dev Portal's FQDN like `http://nginx.devportal.onelogin.test`.
+- Open a web browser and access the Dev Portal's FQDN like `http://nginx.devportal.pingidentity.test`.
 
-  ![](./img/onelogin-devportal-before-login.png)
+  ![](./img/pingidentity-devportal-before-login.png)
+
+  ![](./img/pingidentity-devportal-after-login.png)
 
 - Try `Login` and `Logout`.
 
-  ![](./img/onelogin-devportal-logout.png)
+  ![](./img/pingidentity-devportal-logout.png)
 
 - Test the above TWO steps after changing IdP (PKCE option) and updating Dev Portal via NGINX ACM API.

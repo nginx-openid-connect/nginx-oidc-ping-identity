@@ -4,7 +4,7 @@ Take the following steps to create a new application of Ping Identity for integr
 
 > **Note:**
 >
-> This guide uses the GUI provided with PingOne for Enterprise. It reflects the GUI at the time of initial publication, but the GUI is subject to change. The PingFederate user interace might also differ. Use this guide as a reference and adapt as necessary for the UI you are using.
+> This guide uses the GUI provided with PingOne. It reflects the GUI at the time of initial publication, but the GUI is subject to change. The PingFederate user interace might also differ. Use this guide as a reference and adapt as necessary for the UI you are using.
 
 - [Create a New Application](#create-a-new-application)
 - [Configure Auth Code or PKCE Flow](#configure-auth-code-or-pkce-flow)
@@ -22,7 +22,7 @@ Take the following steps to create a new application of Ping Identity for integr
 
 Create a new application for NGINX Plus:
 
-1. Log in to your Ping Identity account. The administrative dashboard opens automatically. In this guide, we show the PingOne for Enterprise dashboard, and for brevity refer simply to ”PingOne”.
+1. Log in to your Ping Identity account. The administrative dashboard opens automatically. In this guide, we show the PingOne dashboard, and for brevity refer simply to ”PingOne”.
 
 2. Click **Connections** in the left menu, and click **+ Application** button.
 
