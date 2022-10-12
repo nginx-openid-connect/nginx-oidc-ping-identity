@@ -1,13 +1,13 @@
-# How To Set Up NGINX Plus OIDC for Onelogin Integration
+# How To Set Up NGINX Plus OIDC for Ping Identity Integration
 
 Take the following steps to set up NGINX Plus as the OpenID Connect relying party that runs.
 
 ## Configure NGINX OpenID Connect
 
-1. Clone the [nginx-openid-connect/nginx-oidc-onelogin](https://github.com/nginx-openid-connect/nginx-oidc-onelogin) GitHub repository, or download the repo files.
+1. Clone the [nginx-openid-connect/nginx-oidc-ping-identity](https://github.com/nginx-openid-connect/nginx-oidc-ping-identity) GitHub repository, or download the repo files.
 
    ```bash
-   git clone https://github.com/nginx-openid-connect/nginx-oidc-onelogin.git
+   git clone https://github.com/nginx-openid-connect/nginx-oidc-ping-identity.git
    ```
 
 2. In the `oidc_idp.conf`, find the following directives(`$idp_domain`, `$oidc_client`), and update them.
@@ -17,8 +17,12 @@ Take the following steps to set up NGINX Plus as the OpenID Connect relying part
 
    ```nginx
     map $x_client_id $idp_domain {
-        # e.g., nginx-plus-oidc.onelogin.com
+        # e.g., auth.pingone.us
         default "{{Edit-IdP-Domain}}";
+    }
+
+    map $x_client_id $idp_env_id {
+        default "{{Edit-IdP-Environment-ID}}";
     }
 
     map $x_client_id $oidc_client {
