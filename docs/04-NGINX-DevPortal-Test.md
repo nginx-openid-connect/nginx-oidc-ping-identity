@@ -69,18 +69,14 @@ Configure a Dev Portal by either referencing **NGINX Management Suite Docs** of 
 
   **Option 1. Request Body for None PKCE**:
 
-  ````json
+  ```json
   {
     "name": "{{environmentname}}",
-    "functions": [
-      "DEVPORTAL"
-    ],
+    "functions": ["DEVPORTAL"],
     "proxies": [
       {
         "proxyClusterName": "{{devPinstanceGroupName}}",
-        "hostnames": [
-          "{{devPenvironmentHostname}}"
-        ],
+        "hostnames": ["{{devPenvironmentHostname}}"],
         "runtime": "PORTAL-PROXY",
         "policies": {
           "oidc-authz": [
@@ -145,7 +141,6 @@ Configure a Dev Portal by either referencing **NGINX Management Suite Docs** of 
   >        :
   > }
   > ```
-  ````
 
 - Get an environment of `Dev Portal`:
 
