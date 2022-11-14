@@ -18,9 +18,9 @@ Take the following steps to set up NGINX ACM/DevPortal OIDC and test it for Ping
 
   ```bash
   $ sudo vi /etc/hosts
-  127.0.0.1 nginx.devportal.pingidentity.test
+  127.0.0.1 nginx.devportal.pingidentity.test # Note : The provided IP address should be of the host where you installed the Dev Portal packages.
+  # Also make sure your controller and Dev Portal /etc/hosts files have similar entries.
   ```
-
 ## 2. Install NGINX API Connectivity Manager
 
 - [Download NGINX Management Suite](https://docs.nginx.com/nginx-management-suite/)
@@ -168,9 +168,13 @@ Configure a Dev Portal by either referencing **NGINX Management Suite Docs** of 
 
 ## 3. Test Dev Portal OIDC with Ping Identity
 
-- Open a web browser and access the Dev Portal's FQDN like `http://nginx.devportal.pingidentity.test`.
+- Open a web browser and access the Dev Portal's FQDN like `https://nginx.devportal.pingidentity.test`.
 
   ![](./img/pingidentity-devportal-before-login.png)
+
+- Enter your name and password which are registered in PingOne.
+
+  ![](./img/login-ping-one.png)
 
   ![](./img/pingidentity-devportal-after-login.png)
 

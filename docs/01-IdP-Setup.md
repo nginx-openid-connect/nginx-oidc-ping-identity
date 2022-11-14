@@ -38,7 +38,7 @@ Create a new application for NGINX Plus:
 Take the following steps to configure either Auth Code or PKCE.
 
 - Select one of applications that you created. (`nginx-plus-oidc`).
-- Click **Configuration** tab, and clidk **/** icon to edit details.
+- Click **Configuration** tab, and click **/** icon to edit details.
 
 ![](./img/ping-one-app-configuration.png)
 

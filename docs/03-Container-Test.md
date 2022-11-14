@@ -45,7 +45,7 @@ Take the following steps to run NGINX Plus in a Docker container and test OIDC f
 
 - **Login** to click `Sign in` button:
 
-  Enter your name and password which are registered in OntLogin.
+  Enter your name and password which are registered in PingOne.
 
   ![](./img/login-ping-one.png)
 
